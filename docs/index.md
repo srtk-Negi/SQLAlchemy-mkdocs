@@ -104,3 +104,47 @@ SELECT dbo.user_table.index, dbo.user_table.name, dbo.user_table.grade
 FROM dbo.user_table 
 WHERE dbo.user_table.name = :name_1
 ```
+
+#### Basic Insert Query
+```python
+from sqlalchemy import insert
+
+insert_query = insert(table_1).values(index=10, name="Adam", grade="A")
+print(insert_query)
+```
+```
+Output
+INSERT INTO dbo.user_table (index, name, grade) VALUES (:index, :name, :grade)
+```
+
+#### Bulk Insert
+```python
+data_to_insert = [
+    {"index": 1, "name": "John", "grade": "A"},
+    {"index": 2, "name": "Jane", "grade": "B"},
+    {"index": 3, "name": "Adam", "grade": "A"},
+]
+    
+insert_query = insert(table_1).values(data_to_insert)
+print(insert_query)
+```
+```
+Output
+INSERT INTO dbo.user_table (index, name, grade) VALUES (:index_m0, :name_m0, :grade_m0), (:index_m1, :name_m1, :grade_m1), (:index_m2, :name_m2, :grade_m2)
+```
+
+## Examples on how to create a Database connection and execute queries
+
+```python
+from sqlalchemy import create_engine
+
+conn_string = = f"mssql+pyodbc://@{SERVER}/{DATABASE}?driver={DRIVER}&Encrypt=no"
+engine = create_engine(conn_string)
+
+select_query = select(table_1).where(table_1.c.name == "John")
+insert_query = insert(table_1).values(index=10, name="Adam", grade="A")
+
+with engine.connect() as conn:
+    conn.execute()
+
+```
