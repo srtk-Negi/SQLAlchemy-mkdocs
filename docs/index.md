@@ -33,12 +33,19 @@ from sqlalchemy import Table, Integer, String, Column, MetaData
 
 meta_data = MetaData(schema="dbo")
 
-table = Table(
-    name="user_table",
+table_1 = Table(
+    "user_table",
     meta_data,
     Column("index", Integer)
     Column("name", String)
     Column("grade", String)
+)
+
+table_2 = Table(
+    "info_table",
+    meta_data,
+    Column("email", String),
+    Column("address", String)
 )
 ```
 
@@ -73,4 +80,27 @@ print(query)
 Output
 SELECT dbo.user_table.name, dbo.user_table.grade 
 FROM dbo.user_table
+```
+
+#### Select columns from multiple tables
+```python
+select_query = select(table.c.name, table.c.grade, table_2)
+print(select_query)
+```
+```
+Output
+SELECT dbo.user_table.name, dbo.user_table.grade, dbo.info_table.email, dbo.info_table.address 
+FROM dbo.user_table, dbo.info_table
+```
+
+#### Select query with a 'WHERE' clause
+```python
+select_query = select(table_1).where(table_1.c.name == "John")
+print(select_query)
+```
+```
+Output
+SELECT dbo.user_table.index, dbo.user_table.name, dbo.user_table.grade 
+FROM dbo.user_table 
+WHERE dbo.user_table.name = :name_1
 ```
