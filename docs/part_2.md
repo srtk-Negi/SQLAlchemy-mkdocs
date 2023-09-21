@@ -1,26 +1,4 @@
-## What is the difference between SQLAlchemy ORM and SQLAlchemy Core?
-
-#### SQLAlchemy provides two components for interacting with databases - ORM and Core.
-
-#### ORM (Object-Relational Mapping)
-- Enables developers to work with relational databases using the object-oriented approach
-- Uses python classes to define the database model
-- Provides a higher-level OO approach, has abstraction and therefore has overhead
-
-#### SQLAlchemy Core
-- Focuses on constructing and executing SQL queries while giving developers full control over the SQL generation process
-- Uses SQL constructs to build and execute SQL statements
-- Lower level and provides a more direct and SQL-centric way to interact with DB's giving devs more control over the queries, therefore is lightweight, no overhead, and fast
-
-
-#### Conclusion
-- ORM - Objects and Classes, high-level approach, rapid development and less SQL knowledge requirements because of abstraction
-
-- Core - Control over SQL queries, performance, optimization, complex SQL statements, multiple databases, 
-
-Can also take on a hybrid approach - ORM for standard CRUD operations and Core for more optimized and complex SQL
-
-## What does SQLAlchemy core does and how can you build SQL queries with it?
+# What does SQLAlchemy core does and how can you build SQL queries with it?
 - Provides a Pythonic SQL language that allows you to construct SQL queries using Python objects and functions that closely resemble SQL syntax.
 - provides an Engine object that represents a database connection pool and a Connection object for executing queries and managing transactions
 - Database agnostic, works with different DB systems
@@ -131,20 +109,4 @@ print(insert_query)
 ```
 Output
 INSERT INTO dbo.user_table (index, name, grade) VALUES (:index_m0, :name_m0, :grade_m0), (:index_m1, :name_m1, :grade_m1), (:index_m2, :name_m2, :grade_m2)
-```
-
-## Examples on how to create a Database connection and execute queries
-
-```python
-from sqlalchemy import create_engine
-
-conn_string = = f"mssql+pyodbc://@{SERVER}/{DATABASE}?driver={DRIVER}&Encrypt=no"
-engine = create_engine(conn_string)
-
-select_query = select(table_1).where(table_1.c.name == "John")
-insert_query = insert(table_1).values(index=10, name="Adam", grade="A")
-
-with engine.connect() as conn:
-    conn.execute()
-
 ```
