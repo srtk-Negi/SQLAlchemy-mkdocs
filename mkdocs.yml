@@ -1,6 +1,7 @@
 site_name: Presentation
 
 nav:
+  - Home: index.md
   - Part 1: part_1.md
   - Part 2: part_2.md
   - Part 3: part_3.md
@@ -25,14 +26,14 @@ theme:
   palette:
     - scheme: default
       toggle:
-        icon: material/toggle-switch-off-outline 
+        icon: material/toggle-switch-off-outline
         name: Switch to dark mode
       primary: indigo
-      accent: purple 
-    - scheme: slate 
+      accent: purple
+    - scheme: slate
       toggle:
         icon: material/toggle-switch
-        name: Switch to light mode    
+        name: Switch to light mode
       primary: teal
       accent: lime
 
